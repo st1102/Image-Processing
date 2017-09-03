@@ -1,7 +1,7 @@
 import java.io.*;
 import hpkg.fund.pnm.*;
 
-public class prog3_4
+public class YccToNewRgb
 {
     public static void main(String[] args)
     {
@@ -20,21 +20,21 @@ public class prog3_4
 		c1Img.readVoxels(args[1]); //入力c1画像
 		HPnm c2Img = new HPnm();
 		c2Img.readVoxels(args[2]); //入力c2画像
-	    
+
 		int ysize = c1Img.ysize();
 		int xsize = c1Img.xsize();
-		
+
 		HPnm rgbImg = new HPnm(xsize, ysize, 32);  // 結果画素サイズは 32 Bit Per Pixel.
-		
+
 		for(int y = 0; y < ysize; y++) {
 		    for(int x = 0; x < xsize; x++) {
 			int y1 = y1Img.getUnsignedValue(x, y);
 			int c1_dash = c1Img.getUnsignedValue(x, y);
 			int c2_dash = c2Img.getUnsignedValue(x, y);
-			
+
 			int c1 = (int)(c1_dash * (179 + 179)/255 - 179 + 0.5);//変換前に戻す + 0.5で四捨五入
 			int c2 = (int)(c2_dash * (226 + 226)/255 - 226 + 0.5);
-			
+
 			int r = c1 + y1;
 			if(r > 255){ //255以上となった時は255とする
 			    r = 255;
@@ -50,11 +50,11 @@ public class prog3_4
 
 			//r,g,bをマージ
 			int value = (0xff & r) + (0xff00 & (g << 8)) + (0xff0000 & (b << 16));
-			
+
 			rgbImg.setValue(x, y, value);
 		    }
 		}
-		
+
 		rgbImg.writeVoxels(args[3]);
 	    }
 	catch(Exception e)
@@ -63,4 +63,3 @@ public class prog3_4
 	    }
     }
 }
-

@@ -1,7 +1,7 @@
 import java.io.*;
 import hpkg.fund.pnm.*;
 
-public class prog3_5_rgb
+public class RgbColorChange
 {
     public static void main(String[] args)
     {
